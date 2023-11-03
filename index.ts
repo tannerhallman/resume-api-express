@@ -1,18 +1,26 @@
 import express, { Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs"; // Load your OpenAPI specification
 
 import bodyParser from "body-parser";
-import * as staticExperience from './drizzle/experience'
+import * as staticExperience from "./drizzle/experience";
 
-import db from './database'
+import db from "./database";
 
 const app = express();
+const openapiDocument = YAML.load('swagger.yaml'); // Replace with the path to your spec file
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Welcome to My Resume API. Please see the docs at /docs" });
+  res.json({
+    message: "Welcome to My Resume API. Please see the docs at /docs",
+  });
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
+
 // Endpoints for Experience
 app.get("/experience", (req: Request, res: Response) => {
   res.json(staticExperience);

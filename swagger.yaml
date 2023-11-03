@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: My Resume API
+  description: API for displaying resume data
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local Development Server
+paths:
+  /experience:
+    get:
+      summary: Get Professional Experience
+      description: Retrieve a list of professional experience.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Experience'
+  /experience/{id}:
+    get:
+      summary: Get Professional Experience by ID
+      description: Retrieve a specific professional experience by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experience'
+  /skills:
+    get:
+      summary: Get Skills
+      description: Retrieve skills data, including technical skills, languages, and interests.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Skills'
+components:
+  schemas:
+    ResumeData:
+      type: object
+      properties:
+        experience:
+          type: array
+          items:
+            $ref: '#/components/schemas/Experience'
+        skills:
+          $ref: '#/components/schemas/Skills'
+    Experience:
+      type: object
+      properties:
+        company:
+          type: string
+        location:
+          type: string
+        title:
+          type: string
+        dates:
+          type: string
+        description:
+          type: array
+          items:
+            type: string
+    Skills:
+      type: object
+      properties:
+        technical:
+          type: array
+          items:
+            type: string
+        language:
+          type: array
+          items:
+            type: string
+        interests:
+          type: array
+          items:
+            type: string
