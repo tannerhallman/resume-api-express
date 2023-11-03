@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import * as staticExperience from './experience'
 
 import db from './database'
+const app = express();
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
@@ -12,6 +13,9 @@ app.use(bodyParser.json());
 let experience: Object = staticExperience;
 let skills: any[] = [];
 
+app.get('/', () => {
+  
+})
 // Endpoints for Experience
 app.get("/experience", (req: Request, res: Response) => {
   res.json(staticExperience);
@@ -19,20 +23,20 @@ app.get("/experience", (req: Request, res: Response) => {
 
 app.post("/experience", (req: Request, res: Response) => {
   const newExp = req.body;
-  experience.push(newExp);
+  // experience.push(newExp);
   res.json(newExp);
 });
 
 app.put("/experience/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const updatedExp = req.body;
-  experience[id] = updatedExp;
+  // experience[id] = updatedExp;
   res.json(updatedExp);
 });
 
 app.delete("/experience/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  experience.splice(id, 1);
+  // experience.splice(id, 1);
   res.sendStatus(204);
 });
 
