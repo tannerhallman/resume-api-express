@@ -49,3 +49,5 @@ let skills: {
     "Music"
   ];
 };
+
+export default skills;

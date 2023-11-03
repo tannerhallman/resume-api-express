@@ -1,5 +1,4 @@
-let experience = {
-  "experience": [
+let experience = [
     {
       "company": "Coworks",
       "location": "Remote, USA",
@@ -76,6 +75,5 @@ let experience = {
       ]
     }
   ]
-}
 
 export default experience;
